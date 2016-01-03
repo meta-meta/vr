@@ -61,3 +61,19 @@ function animate() {
 
 init();
 animate();
+
+// Publish a simple message to the demo_tutorial channel
+PUBNUB_demo.publish({
+  channel: 'demo_tutorial',
+  message: {"color":"blue"}
+});
+
+PUBNUB_demo.subscribe({
+  channel: 'demo_tutorial',
+  message: msg => console.log(msg)
+})
+
+window.send = (message) => PUBNUB_demo.publish({
+  channel: 'demo_tutorial',
+  message
+})

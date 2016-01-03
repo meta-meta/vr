@@ -50,7 +50,19 @@
     </style>
 </head>
 <body>
+<!-- View the Full Documentation. -->
+<!-- Include the PubNub Library -->
+<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
 
+<!-- Instantiate PubNub -->
+<script type="text/javascript">
+
+    var PUBNUB_demo = PUBNUB.init({
+        publish_key: 'pub-c-b2ed4327-660f-482f-b26e-964c223a6c1d',
+        subscribe_key: 'sub-c-8bb51d1c-b255-11e5-b4bd-02ee2ddab7fe'
+    });
+
+</script>
 <script src="./vendor/three.min.js"></script>
 <script src="js/exporters/OBJExporter.js"></script>
 <script src="./static/bundle.js"></script>
