@@ -62,6 +62,18 @@ function animate() {
 init();
 animate();
 
+//TODO load initial history
+
+//var material = new THREE.MeshLambertMaterial ( { color : 0x00cc00 } );
+//var geometry = new THREE.BoxGeometry( 100, 100, 100 );
+//scene.add( new THREE.Mesh( geometry, material ) );
+//(color, x, y, z) => {
+//  scene.add(new THREE.Mesh(
+//      new THREE.BoxGeometry( x, y, z ),
+//      new THREE.MeshLambertMaterial ( { color : 0x00cc00 } )
+//  ))
+//}
+
 // Publish a simple message to the demo_tutorial channel
 PUBNUB_demo.publish({
   channel: 'demo_tutorial',
