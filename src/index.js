@@ -23,12 +23,6 @@ function init() {
   light = new THREE.DirectionalLight( 0xffffff );
   scene.add( light );
 
-  let code = `var material = new THREE.MeshLambertMaterial ( { color : 0x00cc00 } );
-  var geometry = new THREE.BoxGeometry( 100, 100, 100 );
-  scene.add( new THREE.Mesh( geometry, material ) );`
-
-  eval(`(function (THREE, scene) { ${code} })(THREE, scene)`);
-
   window.addEventListener( 'resize', onWindowResize, false );
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener( 'mouseover', onDocumentMouseMove, false );
@@ -71,12 +65,14 @@ animate();
 // Publish a simple message to the demo_tutorial channel
 PUBNUB_demo.publish({
   channel: 'demo_tutorial',
-  message: {"color":"blue"}
+  message: `var material = new THREE.MeshLambertMaterial ( { color : 0x00cc00 } );
+  var geometry = new THREE.BoxGeometry( 100, 100, 100 );
+  scene.add( new THREE.Mesh( geometry, material ) );`
 });
 
 PUBNUB_demo.subscribe({
   channel: 'demo_tutorial',
-  message: msg => console.log(msg)
+  message: msg => eval(`(function (THREE, scene) { ${msg} })(THREE, scene)`)
 })
 
 window.send = (message) => PUBNUB_demo.publish({
