@@ -4,6 +4,10 @@ var exportButton, floatingDiv;
 var mouseX = 0, mouseY = 0;
 
 
+
+
+
+
 function init() {
 
   renderer = new THREE.WebGLRenderer();
@@ -19,9 +23,11 @@ function init() {
   light = new THREE.DirectionalLight( 0xffffff );
   scene.add( light );
 
-  var material = new THREE.MeshLambertMaterial ( { color : 0x00cc00 } );
+  let code = `var material = new THREE.MeshLambertMaterial ( { color : 0x00cc00 } );
   var geometry = new THREE.BoxGeometry( 100, 100, 100 );
-  scene.add( new THREE.Mesh( geometry, material ) );
+  scene.add( new THREE.Mesh( geometry, material ) );`
+
+  eval(`(function (THREE, scene) { ${code} })(THREE, scene)`);
 
   window.addEventListener( 'resize', onWindowResize, false );
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
