@@ -3,14 +3,6 @@ var camera, scene, light, renderer;
 var exportButton, floatingDiv;
 var mouseX = 0, mouseY = 0;
 
-function exportToObj ()
-{
-  var exporter = new THREE.OBJExporter ();
-  var result = exporter.parse (scene);
-  floatingDiv.style.display = 'block';
-  floatingDiv.innerHTML = result.split ('\n').join ('<br />');
-}
-
 
 function init() {
 
@@ -31,32 +23,9 @@ function init() {
   var geometry = new THREE.BoxGeometry( 100, 100, 100 );
   scene.add( new THREE.Mesh( geometry, material ) );
 
-  window.addEventListener( 'click', onWindowClick, false );
   window.addEventListener( 'resize', onWindowResize, false );
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener( 'mouseover', onDocumentMouseMove, false );
-
-  floatingDiv = document.createElement ('div');
-  floatingDiv.className = 'floating';
-  document.body.appendChild (floatingDiv);
-}
-
-function onWindowClick(event) {
-
-  var needToClose = true;
-  var target = event.target;
-  while (target !== null) {
-    if (target === floatingDiv || target == exportButton) {
-      needToClose = false;
-      break;
-    }
-    target = target.parentElement;
-  }
-
-  if (needToClose) {
-    floatingDiv.style.display = 'none';
-  }
-
 }
 
 function onWindowResize() {
@@ -92,4 +61,3 @@ function animate() {
 
 init();
 animate();
-
